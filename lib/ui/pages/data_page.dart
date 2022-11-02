@@ -15,32 +15,38 @@ class DataPage extends GetView<DataController> {
     Future.delayed(
       Duration.zero,
       () {
-        controller.getData();
-      },
-    );
-
-    controller.timer = Timer.periodic(
-      const Duration(seconds: 5),
-      (Timer t) {
-        controller.getData();
+        if (controller.timer == null) {
+          controller.getData();
+          controller.timer = Timer.periodic(
+            const Duration(seconds: 5),
+            (Timer t) {
+              controller.getData();
+            },
+          );
+        }
       },
     );
 
     List<PieChartSectionData> _generateChartData(int type) {
       late RxList<int> _list;
       late Color _color;
+      late Map<int, String> _map;
       if (type == 0) {
         _list = controller.riceData;
         _color = yellowColor;
+        _map = riceMap;
       } else if (type == 1) {
         _list = controller.meatData;
         _color = purpleColor;
+        _map = meatMap;
       } else if (type == 2) {
         _list = controller.vegData;
         _color = oliveColor;
+        _map = vegMap;
       } else if (type == 3) {
         _list = controller.pickleData;
         _color = orangeColor;
+        _map = pickleMap;
       }
 
       return List.generate(
@@ -49,8 +55,8 @@ class DataPage extends GetView<DataController> {
           return PieChartSectionData(
             color: _color.withOpacity((i + 1) / 4),
             value: _list[i] / _list.sum,
-            title: '${meatMap[i]}: ${_list[i]}',
-            radius: context.width * 0.15,
+            title: '${_map[i]}: ${_list[i]}',
+            radius: context.height * 0.18,
             titleStyle: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -62,6 +68,58 @@ class DataPage extends GetView<DataController> {
       );
     }
 
+    List<Widget> _generateLabelData(int type) {
+      late RxList<int> _list;
+      late Color _color;
+      late Map<int, String> _map;
+      if (type == 0) {
+        _list = controller.riceData;
+        _color = yellowColor;
+        _map = riceMap;
+      } else if (type == 1) {
+        _list = controller.meatData;
+        _color = purpleColor;
+        _map = meatMap;
+      } else if (type == 2) {
+        _list = controller.vegData;
+        _color = oliveColor;
+        _map = vegMap;
+      } else if (type == 3) {
+        _list = controller.pickleData;
+        _color = orangeColor;
+        _map = pickleMap;
+      }
+
+      return List.generate(
+        4,
+        (index) {
+          if (_list.isNotEmpty) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: _color.withOpacity((index + 1) / 4),
+                    radius: 10,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${_map[index]}: ${_list[index]}',
+                    style: const TextStyle(
+                      fontFamily: 'BmHanna11yrs',
+                      fontSize: 30,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: GridView.builder(
@@ -69,7 +127,7 @@ class DataPage extends GetView<DataController> {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 6,
-          childAspectRatio: 1,
+          childAspectRatio: 1.8,
         ),
         itemCount: 4,
         itemBuilder: (context, index) {
@@ -89,40 +147,54 @@ class DataPage extends GetView<DataController> {
             builder: (_) {
               return Card(
                 margin: const EdgeInsets.all(8),
+                semanticContainer: false,
+                clipBehavior: Clip.antiAlias,
                 elevation: 8,
                 child: GridTile(
                   header: SizedBox(
-                    height: 80,
+                    height: 60,
                     child: GridTileBar(
                       backgroundColor: Colors.black,
                       title: Text(
                         _text,
                         style: const TextStyle(
                           fontFamily: 'BmHanna11yrs',
-                          fontSize: 60,
+                          fontSize: 40,
                           color: Colors.white,
                         ),
                       ),
                       // subtitle: Text('Item ${_items[index].split(' ')[1]}'),
                     ),
                   ),
-                  child: Center(
-                    child: SizedBox(
-                      width: context.width * 0.4,
-                      height: context.height * 0.4,
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: PieChart(
-                          PieChartData(
-                            borderData: FlBorderData(
-                              show: false,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 70),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: context.height * 0.36,
+                          height: context.height * 0.36,
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: PieChart(
+                              PieChartData(
+                                borderData: FlBorderData(
+                                  show: false,
+                                ),
+                                sectionsSpace: 0,
+                                centerSpaceRadius: 0,
+                                sections: _generateChartData(index),
+                              ),
                             ),
-                            sectionsSpace: 0,
-                            centerSpaceRadius: 0,
-                            sections: _generateChartData(index),
                           ),
                         ),
-                      ),
+                        SizedBox(width: context.width * 0.05),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _generateLabelData(index),
+                        ),
+                      ],
                     ),
                   ),
                 ),

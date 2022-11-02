@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String endpointUrl = 'http://509e-221-139-39-186.ngrok.io';
+const String endpointUrl = 'https://509e-221-139-39-186.ngrok.io';
 
 const Color lightGrayColor = Color(0xffEEEEEE);
 const Color deepGrayColor = Color(0xffCCCCCC);
@@ -47,7 +47,7 @@ Map<int, String> riceMap = {
 };
 
 Map<int, String> meatMap = {
-  0: '흑미',
+  0: '햄',
   1: '계란지단',
   2: '새우튀김',
   3: '참치',
