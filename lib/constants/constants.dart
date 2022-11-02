@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+const String endpointUrl = 'http://509e-221-139-39-186.ngrok.io';
+
 const Color lightGrayColor = Color(0xffEEEEEE);
 const Color deepGrayColor = Color(0xffCCCCCC);
+const Color purpleColor = Color(0xff550527);
+const Color oliveColor = Color(0xff688E26);
+const Color yellowColor = Color(0xffFAA613);
+const Color orangeColor = Color(0xffF44708);
+
 const String komidaLogo = 'assets/images/komidaLogo.png';
 
 const List<String> riceResults = [
@@ -31,3 +38,31 @@ const List<String> pickleResults = [
   '유교걸/보이인데 섹시해요🔥',
   '이국적인 섹시함의 소유자에요',
 ];
+
+Map<int, String> riceMap = {
+  0: '흑미',
+  1: '현미',
+  2: '백미',
+  3: '키토',
+};
+
+Map<int, String> meatMap = {
+  0: '흑미',
+  1: '계란지단',
+  2: '새우튀김',
+  3: '참치',
+};
+
+Map<int, String> vegMap = {
+  0: '당근',
+  1: '오이',
+  2: '시금치',
+  3: '우엉',
+};
+
+Map<int, String> pickleMap = {
+  0: '단무지',
+  1: '피클',
+  2: '김치',
+  3: '할라피뇨',
+};

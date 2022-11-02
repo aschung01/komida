@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:komida/constants/constants.dart';
-import 'package:komida/controllers/app_controller.dart';
+import 'package:komida/controllers/survey_controller.dart';
 import 'package:komida/ui/pages/home_page.dart';
 import 'package:komida/ui/pages/question1_page.dart';
 import 'package:komida/ui/pages/question2_page.dart';
@@ -11,7 +11,7 @@ import 'package:komida/ui/widgets/button.dart';
 import 'package:komida/ui/widgets/progress_indicator.dart';
 import 'package:get/get.dart';
 
-class QuestionView extends GetView<AppController> {
+class QuestionView extends GetView<SurveyController> {
   const QuestionView({Key? key}) : super(key: key);
 
   void _onBackPressed() {
@@ -25,6 +25,7 @@ class QuestionView extends GetView<AppController> {
   void _onNextPressed() {
     if (controller.page.value == 3) {
       Get.toNamed('/result');
+      controller.postResponse();
     }
     controller.nextPage();
   }
@@ -43,7 +44,7 @@ class QuestionView extends GetView<AppController> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: GetX<AppController>(
+      body: GetX<SurveyController>(
         builder: (_) {
           if (_.page.value == 3) {
             _buttonText = '결과 확인하기';

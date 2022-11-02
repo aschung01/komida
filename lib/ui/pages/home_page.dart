@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:komida/constants/constants.dart';
-import 'package:komida/controllers/app_controller.dart';
+import 'package:komida/controllers/survey_controller.dart';
 import 'package:komida/ui/widgets/button.dart';
 import 'package:komida/ui/widgets/input_field.dart';
 import 'package:get/get.dart';
 
 const String _gimbapImage = 'assets/images/gimbap.png';
 
-class HomePage extends GetView<AppController> {
+class HomePage extends GetView<SurveyController> {
   const HomePage({Key? key}) : super(key: key);
 
   void _onStartPressed() {
@@ -56,7 +56,7 @@ class HomePage extends GetView<AppController> {
                   ),
                 ),
               ),
-              GetBuilder<AppController>(builder: (_) {
+              GetBuilder<SurveyController>(builder: (_) {
                 return ElevatedActionButton(
                   buttonText: '시작하기',
                   onPressed: _onStartPressed,

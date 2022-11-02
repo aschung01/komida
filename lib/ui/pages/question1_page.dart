@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:komida/constants/constants.dart';
-import 'package:komida/controllers/app_controller.dart';
+import 'package:komida/controllers/survey_controller.dart';
 import 'package:komida/ui/widgets/button.dart';
 import 'package:komida/ui/widgets/progress_indicator.dart';
 
-class Question1Page extends GetView<AppController> {
+class Question1Page extends GetView<SurveyController> {
   const Question1Page({Key? key}) : super(key: key);
 
   void _onNextPressed() {
@@ -15,7 +15,7 @@ class Question1Page extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GetX<AppController>(
+      child: GetX<SurveyController>(
         builder: (_) {
           return Column(
             children: [

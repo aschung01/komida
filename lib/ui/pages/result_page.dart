@@ -1,15 +1,11 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:komida/constants/constants.dart';
-import 'package:komida/controllers/app_controller.dart';
+import 'package:komida/controllers/survey_controller.dart';
 import 'package:get/get.dart';
 import 'package:komida/ui/widgets/button.dart';
 
-class ResultPage extends GetView<AppController> {
+class ResultPage extends GetView<SurveyController> {
   const ResultPage({Key? key}) : super(key: key);
 
   void _onResetPressed() {
