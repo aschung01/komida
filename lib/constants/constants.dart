@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String endpointUrl = 'https://509e-221-139-39-186.ngrok.io';
+const String endpointUrl = 'https://14eb-222-112-33-79.ngrok.io';
 
 const Color lightGrayColor = Color(0xffEEEEEE);
 const Color deepGrayColor = Color(0xffCCCCCC);
@@ -27,7 +27,7 @@ const List<String> meatResults = [
 
 const List<String> vegResults = [
   '맞장구를 많이 쳐주는 편인가봐요',
-  '어이 없다는 말, 자주 들으시죠?',
+  "'오이' 없다는 말, 자주 들으시죠?",
   '철이 든 편이에요',
   '울음이 많으신가봐요.. 우엉😭',
 ];
